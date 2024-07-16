@@ -1,0 +1,23 @@
+
+{% extends "base.html" %} 
+{% load bootstrap4 %} 
+
+{% block body %}
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="alert alert-danger" role="alert">
+        Do you really want to delete this item?
+      </div>
+      <div class="text-center">
+        <a href="{% url 'home:students' %}" type="button" class="btn btn-success m-l-5">
+          <i class="far fa-save m-r-5"></i> <span>Draft</span>
+        </a>
+        <button class="btn btn-danger m-l-5" type="submit"> <i class="far fa-trash-alt m-r-5"></i><span>Delete</span></button>
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock body %}
+  

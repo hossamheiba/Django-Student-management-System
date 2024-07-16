@@ -1,0 +1,48 @@
+{% extends "base_generic.html" %} {% load bootstrap4 %} {% block content %}
+
+<div class="main-wrapper login-body">
+  <div class="login-wrapper">
+    <div class="container">
+      <div class="loginbox">
+        <div class="login-left">
+          <img class="img-fluid" src="assets/img/logo-white.png" alt="Logo" />
+        </div>
+        <div class="login-right">
+          <div class="login-right-wrap">
+            <h1>Login</h1>
+            <p class="account-subtitle">Access to our dashboard</p>
+
+            {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+            {% endif %} {% if next %} {% if user.is_authenticated %}
+            <p>
+              Your account doesn't have access to this page. To proceed, please
+              login with an account that has access.
+            </p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %} {% endif %}
+            <form method="post" action="{% url 'login' %}">
+              {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+              {% endbuttons %}
+              <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+            <div class="text-center forgotpass">
+              <a href="forgot-password.html">Forgot Password?</a>
+            </div>
+            <div class="login-or">
+              <span class="or-line"></span>
+              <span class="span-or"></span>
+            </div>
+            <div class="text-center dont-have">
+              Don’t have an account?
+              <a href="{% url 'accounts:signup' %}">Register</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
